@@ -1,0 +1,3 @@
+[submodule "my-submodules"]
+	path = my-submodules
+	url = git@github.com:TNT1999/test-my-library.git
