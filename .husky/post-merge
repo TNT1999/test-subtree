@@ -1,4 +1,11 @@
-#!/usr/bin/env sh
+#!/bin/sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn pull-submodule
+echo 'Pulling submodule fxce-env-fe...'
+
+if yarn pull-submodule | grep -q 'checked out'; then
+  echo "Fxce-env-fe has a new commit, please commit new fxce-env-fe";
+  echo "\n\tgit add fxce-env-fe"
+  echo "\tgit commit -m 'Update submodule to new version'"
+  echo "\tgit push\n"
+fi

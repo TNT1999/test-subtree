@@ -1,0 +1,26 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo 'Pulling submodule fxce-env-fe...'
+
+if yarn pull-submodule | grep -q 'checked out'; then
+  echo "Fxce-env-fe has a new version, please commit new fxce-env-fe";
+  echo "\n\tgit add fxce-env-fe"
+  echo "\tgit commit -m 'Update submodule to new version'"
+  echo "\tgit push\n"
+   while true; do
+    read -p "Do you want to proceed commit? (y/n) " yn
+
+    case $yn in 
+      [yY] )
+        # yarn type-check && yarn lint-staged
+        echo 'commit'
+        break;;
+      [nN] )
+        exit;;
+      * )
+    esac
+  done
+else
+  yarn type-check && yarn lint-staged
+fi
